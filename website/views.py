@@ -14,7 +14,7 @@ from shutil import rmtree
 import os
 import zipfile
 
-import cv2
+
 import os
 import requests
 from fpdf import FPDF
