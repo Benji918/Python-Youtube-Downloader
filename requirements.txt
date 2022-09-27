@@ -62,5 +62,3 @@ mutagen==1.45.1
 pytube==12.1.0
 -e git+https://github.com/GameGenesis/pytube@d2f23ba1552299b671fb214134677dcfa5a34c9c#egg=pytube
 youtube-search-python==1.6.2
-yt-dlp==2022.2.4
-uwsgi
