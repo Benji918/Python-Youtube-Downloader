@@ -89,10 +89,8 @@ def video():
 
         # Try sending the file to the browser to be downloaded
         try:
-            buffer = BytesIO()  # Declaring the buffer
-            video.stream_to_buffer(buffer)
-            buffer.seek(0)
-            downloaded_file = send_file(buffer, as_attachment=True, attachment_filename=video.default_filename)
+            downloaded_file = send_file(path_or_file=file_path, as_attachment=True)
+            rmtree(downloads_path)
             return downloaded_file
         except Exception:
             flash(
