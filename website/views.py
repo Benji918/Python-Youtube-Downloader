@@ -252,6 +252,7 @@ def subtitle():
             Convert_And_Download_Subtitle(subtitles)
             downloads_path = os.path.join(os.getcwd())
             file_path = os.path.join(downloads_path, 'subtitle.pdf')
+            print(file_path)
             return send_file(filename_or_fp=file_path, as_attachment=True, attachment_filename='subtitle.pdf')
         else:
             flash(message='No subtitle for this video!', category='error')
