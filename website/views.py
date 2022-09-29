@@ -249,8 +249,10 @@ def subtitle():
         subtitleURL = get_video_detail(videoID)
         if subtitleURL:
             subtitles = get_subtitle_text(subtitleURL)
-            path = Convert_And_Download_Subtitle(subtitles)
-            return send_file(path, as_attachment=True)
+            Convert_And_Download_Subtitle(subtitles)
+            downloads_path = os.path.join(os.getcwd())
+            file_path = os.path.join(downloads_path, 'subtitle.pdf')
+            return send_file(filename_or_fp=file_path, as_attachment=True, attachment_filename='subtitle.pdf')
         else:
             flash(message='No subtitle for this video!', category='error')
             return redirect(request.url)
@@ -351,7 +353,7 @@ def get_video_detail(videoID):
     # send a get request to the API
     querystring = {"videoId": videoID}
     response = requests.request("GET", url, headers=headers, params=querystring)
-    # conver the response to json format
+    # convert the response to json format
     json_response = response.json()
     # obtain the subtitle url (in XML format)
     try:
@@ -389,13 +391,9 @@ def Convert_And_Download_Subtitle(text):
         # add the line to the pdf
         pdf.cell(200, 5, txt=line, ln=1)
 
-    subtitle_file = pdf.output("subtitle.pdf")
-    path = os.path.abspath(subtitle_file)
-    path = f'{path}\subtitle.pdf'
-    print(path)
-    return path
+    pdf.output("subtitle.pdf")
     # save and download the pdf with a custom file name
-    # print('Subtitles PDF Saved!!!')
+    print('Subtitles PDF Saved!!!')
 
 
 # def generate_transcript(id):
